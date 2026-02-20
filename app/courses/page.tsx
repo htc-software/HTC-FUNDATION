@@ -1,5 +1,3 @@
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
 import Image from 'next/image'
 
 const courses = [
@@ -14,9 +12,7 @@ const courses = [
 
 export default function Courses() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
+    <main className="min-h-screen">
         {/* Hero Section */}
         <div className="bg-gray-100 py-12">
           <div className="max-w-7xl mx-auto px-4">
@@ -66,15 +62,13 @@ export default function Courses() {
               Join our technical training programs and empower yourself with in-demand skills.
             </p>
             <a 
-              href="/contact"
+              href="/contact-us"
               className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-pink-700 transition-colors"
             >
               Apply Now
             </a>
           </div>
         </div>
-      </main>
-      <Footer />
-    </div>
+    </main>
   )
 }
