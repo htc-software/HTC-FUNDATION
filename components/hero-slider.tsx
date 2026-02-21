@@ -48,7 +48,7 @@ export function HeroSlider() {
   const slide = slides[current]
 
   return (
-    <section className="relative w-full h-[360px] sm:h-[420px] md:h-[460px] lg:h-[560px] overflow-hidden">
+    <section className="relative w-full h-[320px] sm:h-[360px] md:h-[390px] lg:h-[460px] overflow-hidden">
       {slides.map((s, i) => (
         <div
           key={i}
