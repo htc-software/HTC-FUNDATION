@@ -6,6 +6,12 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { ChevronDown, Menu, X } from "lucide-react"
 
+const LOGO_DARK =
+  "https://foundationhtc.com/wp-content/uploads/2025/12/foundation_logo_dark.png"
+
+const LOGO_LIGHT =
+  "https://foundationhtc.com/wp-content/uploads/2025/12/htc-foundation-1.png"
+
 const navLinks = [
   { label: "Home", href: "/" },
   {
@@ -13,16 +19,16 @@ const navLinks = [
     href: "/about-us",
     children: [
       { label: "Who we are?", href: "/about-us" },
-      { label: "Our story", href: "/about-us#story" },
+      { label: "Our story", href: "/our-story" },
     ],
   },
   {
     label: "Resources",
     href: "#",
     children: [
-      { label: "Work with us", href: "/contact-us" },
-      { label: "Gallery", href: "/#gallery" },
-      { label: "Blog", href: "#" },
+      { label: "Work with us", href: "/jobs" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Blog", href: "/blog" },
     ],
   },
   { label: "Contact Us", href: "/contact-us" },
@@ -36,6 +42,7 @@ export function Navbar() {
   const isHome = pathname === "/"
   const [scrolled, setScrolled] = useState(false)
   const homeOnTop = isHome && !scrolled
+  const useLightLogo = homeOnTop
 
   const headerPositionClass = isHome
     ? homeOnTop
@@ -69,7 +76,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/htc-foundation-1.webp"
+            src={useLightLogo ? LOGO_LIGHT : LOGO_DARK}
             alt="HTC Foundation Logo"
             width={260}
             height={70}
@@ -128,7 +135,9 @@ export function Navbar() {
 
         {/* CTA Button */}
         <Link
-          href="/contact-us"
+          href="https://hudsontrainingcenter.com/forms/immigrant"
+          target="_blank"
+          rel="noreferrer"
           className={
             isHome
               ? homeOnTop
@@ -142,7 +151,7 @@ export function Navbar() {
               : undefined
           }
         >
-          Technical training for the immigrant community
+          Vocational Training for our Latino Community!
         </Link>
 
         {/* Mobile menu button */}
@@ -204,7 +213,9 @@ export function Navbar() {
             </div>
           ))}
           <Link
-            href="/contact-us"
+            href="https://hudsontrainingcenter.com/forms/immigrant"
+            target="_blank"
+            rel="noreferrer"
             className={
               isHome
                 ? "block mt-4 text-white text-sm font-medium px-5 py-2.5 rounded-full text-center border border-white/60"
@@ -217,7 +228,7 @@ export function Navbar() {
             }
             onClick={() => setMobileOpen(false)}
           >
-            Technical training for the immigrant community
+            Vocational Training for our Latino Community!
           </Link>
         </div>
       )}

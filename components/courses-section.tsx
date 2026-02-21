@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const courses = [
   {
-    image: "/images/course-electrical.jpg",
+    image: "https://hudsontrainingcenter.com/store/3470/Electrician-scaled.jpg",
     title: "CONSTRUCTION: ELECTRICAL",
     campus: "Campus: North-Bergen",
     schedule: "Sunday, 9:00 AM - 2:00 PM, 24 week/s",
@@ -21,7 +21,7 @@ export function CoursesSection() {
         {courses.map((course) => (
           <Link
             key={course.title}
-            href="/contact-us"
+            href="/courses"
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
           >
             <div className="relative h-48 overflow-hidden">

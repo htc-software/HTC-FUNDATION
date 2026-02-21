@@ -1,6 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
 
+const LOGO_LIGHT =
+  "https://foundationhtc.com/wp-content/uploads/2025/12/htc-foundation-1.png"
+
 export function Footer() {
   return (
     <footer className="w-full">
@@ -15,10 +18,11 @@ export function Footer() {
           {/* Logo */}
           <div className="flex items-start gap-3">
             <Image
-              src="/images/htc-logo.png"
+              src={LOGO_LIGHT}
               alt="HTC Foundation Logo"
-              width={70}
-              height={70}
+              width={190}
+              height={48}
+              className="object-contain"
             />
             <div className="flex flex-col">
               <span className="text-white font-bold text-2xl leading-tight">
@@ -40,7 +44,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about-us#story" className="text-white/80 hover:text-white transition-colors">
+                <Link href="/our-story" className="text-white/80 hover:text-white transition-colors">
                   Story
                 </Link>
               </li>
@@ -50,7 +54,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#gallery" className="text-white/80 hover:text-white transition-colors">
+                <Link href="/gallery" className="text-white/80 hover:text-white transition-colors">
                   Gallery
                 </Link>
               </li>
@@ -88,7 +92,13 @@ export function Footer() {
       >
         <div className="max-w-4xl mx-auto bg-[#1a1a3e]/60 rounded-xl py-4 px-6 text-center">
           <p className="text-white/80 text-sm">
-            Terms and Conditions | Privacy Policy
+            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">
+              Terms and Conditions
+            </Link>{" "}
+            |{" "}
+            <Link href="/privacy-policy-2" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
           </p>
           <p className="text-white/80 text-sm mt-2">
             {"Foundation for Hudson Training Center \u00A9 2025. All rights reserved."}

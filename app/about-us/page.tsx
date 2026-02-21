@@ -35,7 +35,7 @@ export default function AboutUsPage() {
       {/* Hero Banner */}
       <section className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
         <Image
-          src="/images/about-hero.jpg"
+          src="https://foundationhtc.com/wp-content/uploads/2025/12/joined-hands-teamwork-business-concept-scaled.jpg"
           alt="About Us - Community hands together"
           fill
           className="object-cover"
@@ -64,7 +64,7 @@ export default function AboutUsPage() {
           </div>
           <div className="relative h-[350px] md:h-[450px] rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="/images/about-presentation.jpg"
+              src="https://foundationhtc.com/wp-content/uploads/2025/01/teacher-talking-students-college-class-scaled-1.jpg"
               alt="HTC Foundation presentation"
               fill
               className="object-cover"

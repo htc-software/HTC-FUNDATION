@@ -24,7 +24,7 @@ const slides = [
         Come Study: <span className="font-bold">Electricity, Plumbing, Heating, HVAC and more</span>, at no cost!
       </p>
     ),
-    cta: "NJ Vocational Summer Youth Program",
+    cta: "Vocational Training for our Latino Community!",
     ctaLink: "/contact-us",
   },
 ]
@@ -48,7 +48,7 @@ export function HeroSlider() {
   const slide = slides[current]
 
   return (
-    <section className="relative w-full h-[500px] md:h-[650px] overflow-hidden">
+    <section className="relative w-full h-[360px] sm:h-[420px] md:h-[460px] lg:h-[560px] overflow-hidden">
       {slides.map((s, i) => (
         <div
           key={i}

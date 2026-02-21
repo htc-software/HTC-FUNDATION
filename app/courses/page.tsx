@@ -1,74 +1,35 @@
 import Image from 'next/image'
 
-const courses = [
-  {
-    title: 'CONSTRUCTION: ELECTRICAL',
-    campus: 'Campus: North-Bergen',
-    schedule: 'Sunday, 9:00 AM - 2:00 PM, 24 week/s',
-    price: '$0',
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80'
-  }
-]
+const HERO_IMAGE =
+  'https://foundationhtc.com/wp-content/uploads/2025/12/group-young-students-doing-technical-vocational-practice-with-teacher-electronic-classroom-education-technology-concept-scaled.jpg'
 
 export default function Courses() {
   return (
-    <main className="min-h-screen">
-        {/* Hero Section */}
-        <div className="bg-gray-100 py-12">
-          <div className="max-w-7xl mx-auto px-4">
-            <h1 className="text-4xl font-bold text-blue-900 text-center mb-4">
-              Available Courses, apply too see if you qualify!
-            </h1>
-          </div>
-        </div>
-
-        {/* Courses Grid */}
-        <div className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {courses.map((course, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                  <div className="relative h-64">
-                    <Image
-                      src={course.image}
-                      alt={course.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-800 mb-4">
-                      {course.title}
-                    </h3>
-                    <p className="text-gray-600 mb-2">{course.campus}</p>
-                    <p className="text-gray-600 mb-4">{course.schedule}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-3xl font-bold text-blue-900">{course.price}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+    <main>
+      <section className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
+        <Image src={HERO_IMAGE} alt="Free Courses" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="relative z-10 flex items-end h-full pb-12 px-4">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-12 bg-[#ff0080]" />
+              <h1 className="text-white text-3xl md:text-5xl font-bold">Free Courses</h1>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Call to Action */}
-        <div className="bg-gradient-to-r from-blue-800 to-purple-900 py-20">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Start Your Journey?
-            </h2>
-            <p className="text-xl text-white mb-8">
-              Join our technical training programs and empower yourself with in-demand skills.
-            </p>
-            <a 
-              href="/contact-us"
-              className="inline-block bg-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-pink-700 transition-colors"
-            >
-              Apply Now
-            </a>
+      <div className="w-full h-2 bg-[#ff0080]" />
+
+      <section className="w-full bg-[#f5f5f5] py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-12" id="courses">
+              <p className="text-[#4b5563]">No courses available (or error in the AWS service).</p>
+            </div>
           </div>
         </div>
+      </section>
     </main>
   )
 }
