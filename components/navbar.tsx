@@ -46,9 +46,9 @@ export function Navbar() {
 
   const headerPositionClass = isHome
     ? homeOnTop
-      ? "absolute top-10 left-0 right-0"
-      : "fixed top-10 left-0 right-0"
-    : "sticky top-0"
+      ? "absolute top-8 left-0 right-0"
+      : "fixed top-8 left-0 right-0"
+    : "sticky top-8"
 
   useEffect(() => {
     const onScroll = () => {
@@ -110,7 +110,9 @@ export function Navbar() {
                 <div
                   className={
                     isHome
-                      ? "absolute top-full left-0 bg-[#0a0a6e]/95 shadow-lg rounded-md py-2 min-w-[180px] z-50 border border-white/10"
+                      ? homeOnTop
+                        ? "absolute top-full left-0 bg-[#0a0a6e]/95 shadow-lg rounded-md py-2 min-w-[180px] z-50 border border-white/10"
+                        : "absolute top-full left-0 bg-white shadow-lg rounded-md py-2 min-w-[180px] z-50 border border-[#e5e7eb]"
                       : "absolute top-full left-0 bg-white shadow-lg rounded-md py-2 min-w-[180px] z-50"
                   }
                 >
@@ -120,7 +122,9 @@ export function Navbar() {
                       href={child.href}
                       className={
                         isHome
-                          ? "block px-4 py-2 text-sm text-white/90 hover:bg-[#2f7bff]/25 hover:text-white transition-colors"
+                          ? homeOnTop
+                            ? "block px-4 py-2 text-sm text-white/90 hover:bg-[#2f7bff]/25 hover:text-white transition-colors"
+                            : "block px-4 py-2 text-sm text-[#0a0a2e] hover:bg-[#f5f5f5] hover:text-[#0a0a6e] transition-colors"
                           : "block px-4 py-2 text-sm text-[#0a0a2e] hover:bg-[#f5f5f5] hover:text-[#0a0a6e] transition-colors"
                       }
                     >
@@ -175,7 +179,9 @@ export function Navbar() {
         <div
           className={
             isHome
-              ? "lg:hidden bg-[#0a0a6e]/95 border-t border-white/10 px-4 py-4"
+              ? homeOnTop
+                ? "lg:hidden bg-[#0a0a6e]/95 border-t border-white/10 px-4 py-4"
+                : "lg:hidden bg-white border-t border-[#e5e7eb] px-4 py-4"
               : "lg:hidden bg-white border-t border-[#e5e7eb] px-4 py-4"
           }
         >
@@ -185,7 +191,9 @@ export function Navbar() {
                 href={link.href}
                 className={
                   isHome
-                    ? "block py-2 text-white font-medium"
+                    ? homeOnTop
+                      ? "block py-2 text-white font-medium"
+                      : "block py-2 text-[#0a0a2e] font-medium"
                     : "block py-2 text-[#0a0a2e] font-medium"
                 }
                 onClick={() => !link.children && setMobileOpen(false)}
@@ -200,7 +208,9 @@ export function Navbar() {
                       href={child.href}
                       className={
                         isHome
-                          ? "block py-1.5 text-sm text-white/80"
+                          ? homeOnTop
+                            ? "block py-1.5 text-sm text-white/80"
+                            : "block py-1.5 text-sm text-[#6b7280]"
                           : "block py-1.5 text-sm text-[#6b7280]"
                       }
                       onClick={() => setMobileOpen(false)}
@@ -218,11 +228,13 @@ export function Navbar() {
             rel="noreferrer"
             className={
               isHome
-                ? "block mt-4 text-white text-sm font-medium px-5 py-2.5 rounded-full text-center border border-white/60"
+                ? homeOnTop
+                  ? "block mt-4 text-white text-sm font-medium px-5 py-2.5 rounded-full text-center border border-white/60"
+                  : "block mt-4 bg-[#ff0080] text-white text-sm font-medium px-5 py-2.5 rounded-full text-center"
                 : "block mt-4 bg-[#ff0080] text-white text-sm font-medium px-5 py-2.5 rounded-full text-center"
             }
             style={
-              isHome
+              isHome && homeOnTop
                 ? { background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)" }
                 : undefined
             }

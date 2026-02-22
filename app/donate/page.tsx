@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { HeartHandshake, Mail, ShieldCheck, Sparkles } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Donate - HTC Foundation",
@@ -8,6 +9,16 @@ export const metadata: Metadata = {
 }
 
 export default function DonatePage() {
+  const initiatives = [
+    "To foster supportive community and private sector relationships to service the interest and needs of the Latino Community",
+    "To inform the Latino Community about the strengths and challenges faced by Hudson Training Center Inc for expansion purposes",
+    "To provide mini-grants to students to develop innovative programs and activities in Vocational and Technical Trades",
+    "To provide small grants to Hudson Training Center Inc. for educational staff members to initiate quality projects consistent with the goals of the Foundation and to bring positive attention Hudson Training Center Inc.",
+    "To provide scholarships to students of Hudson Training Center Inc. to further their training for licensing and entrepreneurship opportunities",
+    "To make distributions, for Vocational Training, to organizations that qualify as exempt organizations under Section 501 (C) (3) of the Internal Revenue Code or any successor statute",
+    "To seek donations of equipment and funds from business or individuals to support the Foundation’s Vocational training expansion for the Latino Community at large.",
+  ]
+
   return (
     <main>
       {/* Hero Banner */}
@@ -19,6 +30,10 @@ export default function DonatePage() {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a6e]/70 via-[#2d1b69]/60 to-[#8b1a6e]/50" />
+        <div className="absolute inset-0 opacity-[0.28]">
+          <div className="absolute -top-24 -left-24 w-[520px] h-[520px] rounded-full bg-[#ff0080] blur-3xl animate-pulse" />
+          <div className="absolute -bottom-28 -right-24 w-[560px] h-[560px] rounded-full bg-[#0a0a6e] blur-3xl animate-pulse" />
+        </div>
         <div className="relative z-10 flex items-end h-full pb-12 px-4">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex items-center gap-3">
@@ -33,76 +48,143 @@ export default function DonatePage() {
       <div className="w-full h-2 bg-[#ff0080]" />
 
       {/* Donate Content */}
-      <section className="w-full bg-white py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-[#0a0a6e] text-2xl md:text-3xl font-bold mb-6">
-            Support Our Mission
-          </h2>
-          <p className="text-[#4b5563] text-lg leading-relaxed mb-8">
-            {"Your generous donation helps us provide vocational training and empower our Latino Community. Every contribution makes a difference in someone's life, helping them gain the skills they need for a brighter future."}
-          </p>
-          <p className="text-[#4b5563] leading-relaxed mb-12">
-            {"Foundation for Hudson Training Center Inc. is a federally recognized 501(c)(3) non-profit organization. All donations are tax-deductible to the fullest extent allowed by law."}
-          </p>
-
-          {/* Donation options */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-            {[25, 50, 100].map((amount) => (
+      <section className="w-full bg-[#f5f5f5] py-14 md:py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative rounded-[36px] overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 opacity-[0.55]">
               <div
-                key={amount}
-                className="border-2 border-[#0a0a6e] rounded-xl p-8 hover:bg-[#0a0a6e] hover:text-white transition-colors group cursor-pointer"
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, rgba(10,10,110,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,110,0.08) 1px, transparent 1px)",
+                  backgroundSize: "28px 28px",
+                }}
+              />
+              <div className="absolute -top-28 left-1/3 w-[480px] h-[480px] rounded-full bg-[#ff0080]/30 blur-3xl animate-pulse" />
+              <div className="absolute -bottom-40 right-1/4 w-[520px] h-[520px] rounded-full bg-[#0a0a6e]/25 blur-3xl animate-pulse" />
+            </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-5">
+              <div
+                className="rounded-[28px] border border-white/50 shadow-sm overflow-hidden animate-in fade-in-0 slide-in-from-bottom-4 duration-700"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(10,10,110,0.96) 0%, rgba(45,27,105,0.96) 45%, rgba(139,26,110,0.96) 75%, rgba(255,0,128,0.96) 100%)",
+                }}
               >
-                <p className="text-3xl font-bold text-[#0a0a6e] group-hover:text-white transition-colors">
-                  ${amount}
-                </p>
-                <p className="text-[#6b7280] mt-2 group-hover:text-white/80 transition-colors">
-                  One-time donation
-                </p>
+                <div className="relative p-8 md:p-10">
+                  <div className="absolute inset-0 opacity-[0.14]">
+                    <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-white blur-3xl" />
+                    <div className="absolute -bottom-28 -right-24 w-80 h-80 rounded-full bg-white blur-3xl" />
+                  </div>
+
+                  <div className="relative">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2">
+                      <Sparkles className="w-4 h-4 text-white/90" />
+                      <p className="text-white/80 text-xs tracking-[0.35em] uppercase">Support HTC Foundation</p>
+                    </div>
+                    <h2 className="mt-4 text-white text-3xl md:text-4xl font-extrabold tracking-tight">
+                      Support Our Mission
+                    </h2>
+
+                    <p className="mt-4 text-white/85 text-base md:text-lg leading-relaxed">
+                      Your donation helps us expand access to vocational and technical training while empowering our Latino
+                      Community.
+                    </p>
+
+                    <div className="mt-6 flex items-start gap-3 rounded-2xl border border-white/20 bg-white/10 p-4">
+                      <ShieldCheck className="w-5 h-5 text-white/90 mt-0.5" />
+                      <p className="text-white/80 text-sm leading-relaxed">
+                        Foundation for Hudson Training Center Inc. is a federally recognized 501(c)(3) non-profit organization.
+                        Donations are tax-deductible to the fullest extent allowed by law.
+                      </p>
+                    </div>
+
+                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {[25, 50, 100].map((amount) => (
+                        <div
+                          key={amount}
+                          className="group relative rounded-2xl border border-white/25 bg-white/10 p-5 text-center overflow-hidden transition-all hover:-translate-y-0.5 hover:bg-white/15 hover:border-white/40"
+                        >
+                          <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-white/35 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[420px]" />
+                          <p className="text-white text-2xl font-extrabold">${amount}</p>
+                          <p className="text-white/75 text-xs mt-1 tracking-[0.22em] uppercase">One-time</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                      <Link
+                        href="mailto:info@foundationhtc.com?subject=Donation%20Inquiry"
+                        className="group relative inline-flex items-center justify-center gap-2 bg-white text-[#0a0a6e] font-semibold px-6 py-3 rounded-full overflow-hidden transition-all hover:-translate-y-0.5 hover:bg-white/90"
+                      >
+                        <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-[#ff0080]/30 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[520px]" />
+                        <Mail className="w-4 h-4" />
+                        Contact Us to Donate
+                      </Link>
+                      <Link
+                        href="/contact-us"
+                        className="inline-flex items-center justify-center gap-2 border border-white/35 text-white font-semibold px-6 py-3 rounded-full transition-all hover:-translate-y-0.5 hover:bg-white/10"
+                      >
+                        <HeartHandshake className="w-4 h-4" />
+                        Get Involved
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
+
+            <div className="lg:col-span-7">
+              <div className="rounded-[28px] bg-white border border-[#e5e7eb] shadow-sm overflow-hidden animate-in fade-in-0 slide-in-from-bottom-4 duration-700 delay-150">
+                <div className="p-8 md:p-10">
+                  <p className="text-[#0a0a6e] text-xs tracking-[0.35em] uppercase">Donation Initiatives</p>
+                  <h3 className="mt-4 text-[#0a0a2e] text-2xl md:text-3xl font-extrabold tracking-tight">
+                    Where Your Support Goes
+                  </h3>
+                  <p className="mt-3 text-[#6b7280] leading-relaxed">
+                    Your generosity helps us expand programs, fund mini-grants and scholarships, and strengthen partnerships
+                    that create lasting impact.
+                  </p>
+
+                  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {initiatives.map((text, idx) => (
+                      <div
+                        key={idx}
+                        className="group rounded-2xl border border-[#e5e7eb] bg-[#f9fafb] p-5 transition-all hover:-translate-y-0.5 hover:border-[#0a0a6e]/40 hover:shadow-sm"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="mt-0.5 w-9 h-9 rounded-full bg-[#0a0a6e]/10 flex items-center justify-center flex-shrink-0">
+                            <span className="text-[#0a0a6e] text-sm font-bold">{idx + 1}</span>
+                          </div>
+                          <p className="text-[#374151] text-sm leading-relaxed group-hover:text-[#111827]">{text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-10 rounded-2xl border border-[#ff0080]/30 bg-[#ff0080]/5 p-6">
+                    <p className="text-[#0a0a2e] font-semibold">Want to donate equipment or sponsor a program?</p>
+                    <p className="mt-2 text-[#6b7280] text-sm leading-relaxed">
+                      We welcome support from businesses and individuals. Reach out and we’ll guide you through the best way
+                      to help.
+                    </p>
+                    <div className="mt-4">
+                      <Link
+                        href="mailto:info@foundationhtc.com?subject=Donation%20Initiatives"
+                        className="group relative inline-flex items-center justify-center gap-2 bg-[#ff0080] text-white font-semibold px-6 py-3 rounded-full overflow-hidden transition-all hover:-translate-y-0.5 hover:bg-[#e0006f]"
+                      >
+                        <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[520px]" />
+                        <Mail className="w-4 h-4" />
+                        Email Us
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <Link
-            href="mailto:info@foundationhtc.com?subject=Donation%20Inquiry"
-            className="inline-block bg-[#ff0080] text-white font-semibold px-10 py-4 rounded-full text-lg hover:bg-[#e0006f] transition-colors"
-          >
-            Contact Us to Donate
-          </Link>
-
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-[#0a0a6e]/10 flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-[#0a0a6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <h3 className="text-[#0a0a2e] font-bold text-lg mb-2">Fund Education</h3>
-              <p className="text-[#6b7280] text-sm">
-                Help provide free vocational training to those who need it most.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-[#0a0a6e]/10 flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-[#0a0a6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-[#0a0a2e] font-bold text-lg mb-2">Build Community</h3>
-              <p className="text-[#6b7280] text-sm">
-                Strengthen our Latino community through skills and opportunity.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-[#0a0a6e]/10 flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-[#0a0a6e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-              </div>
-              <h3 className="text-[#0a0a2e] font-bold text-lg mb-2">Create Impact</h3>
-              <p className="text-[#6b7280] text-sm">
-                Every dollar creates pathways to high-wage, high-skill employment.
-              </p>
-            </div>
           </div>
         </div>
       </section>
