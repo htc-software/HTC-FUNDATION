@@ -123,13 +123,6 @@ export default function DonatePage() {
                         <Mail className="w-4 h-4" />
                         Contact Us to Donate
                       </Link>
-                      <Link
-                        href="/contact-us"
-                        className="inline-flex items-center justify-center gap-2 border border-white/35 text-white font-semibold px-6 py-3 rounded-full transition-all hover:-translate-y-0.5 hover:bg-white/10"
-                      >
-                        <HeartHandshake className="w-4 h-4" />
-                        Get Involved
-                      </Link>
                     </div>
                   </div>
                 </div>
@@ -139,7 +132,6 @@ export default function DonatePage() {
             <div className="lg:col-span-7">
               <div className="rounded-[28px] bg-white border border-[#e5e7eb] shadow-sm overflow-hidden animate-in fade-in-0 slide-in-from-bottom-4 duration-700 delay-150">
                 <div className="p-8 md:p-10">
-                  <p className="text-[#0a0a6e] text-xs tracking-[0.35em] uppercase">Donation Initiatives</p>
                   <h3 className="mt-4 text-[#0a0a2e] text-2xl md:text-3xl font-extrabold tracking-tight">
                     Where Your Support Goes
                   </h3>
@@ -155,9 +147,6 @@ export default function DonatePage() {
                         className="group rounded-2xl border border-[#e5e7eb] bg-[#f9fafb] p-5 transition-all hover:-translate-y-0.5 hover:border-[#0a0a6e]/40 hover:shadow-sm"
                       >
                         <div className="flex items-start gap-3">
-                          <div className="mt-0.5 w-9 h-9 rounded-full bg-[#0a0a6e]/10 flex items-center justify-center flex-shrink-0">
-                            <span className="text-[#0a0a6e] text-sm font-bold">{idx + 1}</span>
-                          </div>
                           <p className="text-[#374151] text-sm leading-relaxed group-hover:text-[#111827]">{text}</p>
                         </div>
                       </div>
