@@ -26,7 +26,7 @@ export default function BlogPage() {
             </p>
             <div className="mx-auto mt-8 h-px w-56 bg-white/35" />
             <p className="mt-6 text-white/80 text-sm">
-              Thank you for your patience.
+              Thank you for your patienc.
             </p>
           </div>
         </div>
