@@ -62,8 +62,8 @@ export default function ContactUsPage() {
                 </div>
                 <div>
                   <h3 className="text-[#0a0a2e] font-bold text-lg">Phone</h3>
-                  <a href="tel:+15513276662" className="text-[#4b5563] mt-1 hover:text-[#0a0a6e] transition-colors">
-                    +1 (551) 327-6662
+                  <a href="tel:+18002400868" className="text-[#4b5563] mt-1 hover:text-[#0a0a6e] transition-colors">
+                    1-800-240-0868
                   </a>
                 </div>
               </div>
@@ -76,8 +76,11 @@ export default function ContactUsPage() {
                 </div>
                 <div>
                   <h3 className="text-[#0a0a2e] font-bold text-lg">Email</h3>
-                  <a href="mailto:info@foundationhtc.com" className="text-[#4b5563] mt-1 hover:text-[#0a0a6e] transition-colors">
-                    info@foundationhtc.com
+                  <a
+                    href="mailto:coordinator@hudsontrainingcenter.com"
+                    className="text-[#4b5563] mt-1 hover:text-[#0a0a6e] transition-colors"
+                  >
+                    coordinator@hudsontrainingcenter.com
                   </a>
                 </div>
               </div>

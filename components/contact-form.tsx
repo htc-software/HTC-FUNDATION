@@ -46,7 +46,7 @@ export function ContactForm() {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className="w-full px-4 py-3 rounded-lg border border-[#e5e7eb] text-[#0a0a2e] bg-white focus:outline-none focus:ring-2 focus:ring-[#0a0a6e] focus:border-transparent transition-colors"
-            placeholder="your@email.com"
+            placeholder="coordinator@hudsontrainingcenter.com"
           />
         </div>
         <div>
@@ -59,7 +59,7 @@ export function ContactForm() {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className="w-full px-4 py-3 rounded-lg border border-[#e5e7eb] text-[#0a0a2e] bg-white focus:outline-none focus:ring-2 focus:ring-[#0a0a6e] focus:border-transparent transition-colors"
-            placeholder="(551) 327-6662"
+            placeholder="1-800-240-0868"
           />
         </div>
       </div>

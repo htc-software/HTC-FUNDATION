@@ -68,13 +68,16 @@ export function Footer() {
             </h3>
             <ul className="flex flex-col gap-3">
               <li>
-                <a href="tel:+15513276662" className="text-white/80 hover:text-white transition-colors">
-                  +1 (551) 327-6662
+                <a href="tel:+18002400868" className="text-white/80 hover:text-white transition-colors">
+                  1-800-240-0868
                 </a>
               </li>
               <li>
-                <a href="mailto:info@foundationhtc.com" className="text-white/80 hover:text-white transition-colors">
-                  info@foundationhtc.com
+                <a
+                  href="mailto:coordinator@hudsontrainingcenter.com"
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  coordinator@hudsontrainingcenter.com
                 </a>
               </li>
               <li className="text-white/80">1600 E St Georges Ave, Linden, NJ 07036</li>

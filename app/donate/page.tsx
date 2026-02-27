@@ -116,7 +116,7 @@ export default function DonatePage() {
 
                     <div className="mt-8 flex flex-col sm:flex-row gap-3">
                       <Link
-                        href="mailto:info@foundationhtc.com?subject=Donation%20Inquiry"
+                        href="mailto:coordinator@hudsontrainingcenter.com?subject=Donation%20Inquiry"
                         className="group relative inline-flex items-center justify-center gap-2 bg-white text-[#0a0a6e] font-semibold px-6 py-3 rounded-full overflow-hidden transition-all hover:-translate-y-0.5 hover:bg-white/90"
                       >
                         <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-[#ff0080]/30 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[520px]" />
@@ -161,7 +161,7 @@ export default function DonatePage() {
                     </p>
                     <div className="mt-4">
                       <Link
-                        href="mailto:info@foundationhtc.com?subject=Donation%20Initiatives"
+                        href="mailto:coordinator@hudsontrainingcenter.com?subject=Donation%20Initiatives"
                         className="group relative inline-flex items-center justify-center gap-2 bg-[#ff0080] text-white font-semibold px-6 py-3 rounded-full overflow-hidden transition-all hover:-translate-y-0.5 hover:bg-[#e0006f]"
                       >
                         <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[520px]" />
