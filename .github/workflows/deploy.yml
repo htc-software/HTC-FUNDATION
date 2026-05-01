@@ -30,9 +30,18 @@ jobs:
           EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         run: |
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$EC2_SSH_PRIVATE_KEY" | perl -pe 's/\\n/\n/g; s/\r//g' > ~/.ssh/id_rsa
+          key_file="$HOME/.ssh/id_rsa"
+
+          printf '%s\n' "$EC2_SSH_PRIVATE_KEY" | perl -pe 's/\\n/\n/g; s/\r//g' > "$key_file"
+          if ! grep -q 'BEGIN .*PRIVATE KEY' "$key_file"; then
+            printf '%s' "$EC2_SSH_PRIVATE_KEY" | tr -d '\r\n ' | base64 -d > "$key_file" 2>/dev/null || true
+          fi
+
           chmod 600 ~/.ssh/id_rsa
-          ssh-keygen -y -f ~/.ssh/id_rsa > /dev/null
+          if ! ssh-keygen -y -f "$key_file" > /dev/null; then
+            echo "::error::EC2_SSH_PRIVATE_KEY must be an unencrypted SSH private key, either pasted with BEGIN/END PRIVATE KEY lines or base64-encoded from the key file."
+            exit 1
+          fi
           ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
