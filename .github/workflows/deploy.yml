@@ -16,12 +16,13 @@ jobs:
 
       - name: Create source archive
         run: |
-          tar -czf source.tar.gz \
+          tar \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='.next' \
             --exclude='.env.local' \
-            --exclude='source.tar.gz' \
+            -czf "$RUNNER_TEMP/source.tar.gz" \
+            -C "$GITHUB_WORKSPACE" \
             .
 
       - name: Setup SSH
@@ -34,7 +35,7 @@ jobs:
       - name: Deploy to EC2
         run: |
           # Transfer source archive
-          scp -i ~/.ssh/id_rsa source.tar.gz ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/
+          scp -i ~/.ssh/id_rsa "$RUNNER_TEMP/source.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz
 
           # Execute deployment commands on EC2
           ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
@@ -78,4 +79,4 @@ jobs:
         if: always()
         run: |
           rm -f ~/.ssh/id_rsa
-          rm -f source.tar.gz
+          rm -f "$RUNNER_TEMP/source.tar.gz"
