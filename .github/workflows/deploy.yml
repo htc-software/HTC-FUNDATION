@@ -36,10 +36,26 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
 
+      - name: Check EC2 connectivity
+        run: |
+          echo "Testing TCP connectivity to ${{ secrets.EC2_HOST }}:22 ..."
+          if ! nc -zv -w 15 "${{ secrets.EC2_HOST }}" 22; then
+            echo "::error::Cannot reach EC2 host on port 22."
+            echo "::error::Go to AWS Console → EC2 → Instances and verify:"
+            echo "::error::  1) The instance is in state 'running'"
+            echo "::error::  2) Security Group has inbound rule: SSH (22) from 0.0.0.0/0"
+            echo "::error::  3) The EC2_HOST secret matches the current Public IP/DNS"
+            exit 1
+          fi
+          echo "EC2 is reachable on port 22."
+
       - name: Add EC2 host to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -T 30 -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts || {
+            echo "::error::ssh-keyscan failed - host unreachable or key changed."
+            exit 1
+          }
 
       - name: Deploy to EC2
         run: |
