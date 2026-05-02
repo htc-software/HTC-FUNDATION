@@ -52,12 +52,15 @@ jobs:
           # Execute deployment commands on EC2
           ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
             set -e
+
+            APP_DIR=/var/www/nextjs-app
             
-            # Navigate to application directory
-            cd /var/www/nextjs-app
+            # Ensure the application directory exists, then extract with elevated permissions.
+            sudo mkdir -p "$APP_DIR"
+            cd "$APP_DIR"
             
             # Extract source archive
-            tar -xzf /tmp/source.tar.gz
+            sudo tar --no-same-owner --overwrite -xzf /tmp/source.tar.gz
             rm /tmp/source.tar.gz
             
             # Install dependencies
