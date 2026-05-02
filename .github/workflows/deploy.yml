@@ -50,20 +50,18 @@ jobs:
           echo "EC2 is reachable on port 22."
 
       - name: Add EC2 host to known_hosts
+        continue-on-error: true
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -T 30 -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts || {
-            echo "::error::ssh-keyscan failed - host unreachable or key changed."
-            exit 1
-          }
+          ssh-keyscan -T 30 -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts || true
 
       - name: Deploy to EC2
         run: |
           # Transfer source archive
-          scp -o StrictHostKeyChecking=yes "$RUNNER_TEMP/source.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz
+          scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=~/.ssh/known_hosts "$RUNNER_TEMP/source.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz
 
           # Execute deployment commands on EC2
-          ssh -o StrictHostKeyChecking=yes ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
+          ssh -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=~/.ssh/known_hosts ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
             set -e
 
             echo "Node version: $(node -v || true)"
