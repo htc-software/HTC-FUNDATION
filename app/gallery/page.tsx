@@ -11,7 +11,7 @@ export default function GalleryPage() {
     <main>
       <section className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-17-at-12.57.32-AM-1.jpeg"
+          src="/htcimage1.webp"
           alt="Gallery"
           fill
           className="object-cover"

@@ -13,7 +13,7 @@ export default function ContactUsPage() {
       {/* Hero Banner */}
       <section className="relative w-full h-[250px] md:h-[350px] overflow-hidden">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2025/01/customer-service-smile-portrait-woman-office-with-headset-working-online-telemarketing-consultation-happy-call-center-female-consultant-with-crm-communication-workplace-scaled-1.jpg"
+          src="/htcimage2.webp"
           alt="Contact Us"
           fill
           className="object-cover"

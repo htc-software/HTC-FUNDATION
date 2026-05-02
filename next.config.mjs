@@ -9,14 +9,17 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'foundationhtc.com',
+        pathname: '/**',
       },
       {
         protocol: 'http',
         hostname: 'foundhudsontrainingcenter.org',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'foundhudsontrainingcenter.org',
+        pathname: '/**',
       },
     ],
   },

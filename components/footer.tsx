@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 
 const LOGO_LIGHT =
-  "https://foundationhtc.com/wp-content/uploads/2025/12/htc-foundation-1.png"
+  "/htc-foundation-1.webp"
 
 export function Footer() {
   return (

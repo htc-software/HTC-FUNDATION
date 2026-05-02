@@ -11,7 +11,7 @@ export default function JobsPage() {
     <main>
       <section className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2025/01/customer-service-agent-financial-advisor-call-center-employee-sits-desk-company-scaled-1.jpg"
+          src="/htcimage2.webp"
           alt="Work with us"
           fill
           className="object-cover"

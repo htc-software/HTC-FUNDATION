@@ -5,7 +5,7 @@ export function GallerySection() {
     <section id="gallery" className="w-full">
       <div className="relative w-full h-[400px] md:h-[500px]">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2024/12/htc-1-1.jpg"
+          src="/htcimage1.webp"
           alt="Students working at computers"
           fill
           className="object-cover"

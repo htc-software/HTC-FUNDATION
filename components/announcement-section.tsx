@@ -5,7 +5,7 @@ export function AnnouncementSection() {
     <section className="relative w-full py-10 md:py-12 overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2025/12/working-fast-get-even-slowest-computer-running-shot-two-young-technicians-repairing-computer-hardware-together-scaled.jpg"
+          src="/htcimage2.webp"
           alt="Technical training background"
           fill
           className="object-cover"

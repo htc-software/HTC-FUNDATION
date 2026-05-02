@@ -24,7 +24,7 @@ export default function DonatePage() {
       {/* Hero Banner */}
       <section className="relative w-full h-[250px] md:h-[350px] overflow-hidden">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2025/12/joined-hands-teamwork-business-concept-scaled.jpg"
+          src="/htcimage1.webp"
           alt="Donate to HTC Foundation"
           fill
           className="object-cover"

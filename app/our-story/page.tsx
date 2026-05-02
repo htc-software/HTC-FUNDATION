@@ -11,7 +11,7 @@ export default function OurStoryPage() {
     <main>
       <section className="relative w-full h-[300px] md:h-[400px] overflow-hidden">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2025/12/college-science-classroom-diverse-young-south-asian-female-experimenting-with-computer-components-scaled.jpg"
+          src="/htcimage1.webp"
           alt="Our story"
           fill
           className="object-cover"
@@ -53,7 +53,7 @@ export default function OurStoryPage() {
           <div className="lg:col-span-5">
             <div className="relative w-full h-[420px] rounded-[28px] overflow-hidden">
               <Image
-                src="https://foundationhtc.com/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-17-at-12.57.32-AM-1-768x1024.jpeg"
+                src="/htcimage2.webp"
                 alt="HTC Foundation"
                 fill
                 className="object-cover"
@@ -65,7 +65,7 @@ export default function OurStoryPage() {
 
       <section className="relative w-full py-16 md:py-24 px-4 overflow-hidden">
         <Image
-          src="https://foundationhtc.com/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-17-at-12.57.31-AM-2.jpeg"
+          src="/htcimage1.webp"
           alt="Community"
           fill
           className="object-cover"

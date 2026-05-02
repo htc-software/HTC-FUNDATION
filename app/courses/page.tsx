@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 const HERO_IMAGE =
-  'https://foundationhtc.com/wp-content/uploads/2025/12/group-young-students-doing-technical-vocational-practice-with-teacher-electronic-classroom-education-technology-concept-scaled.jpg'
+  '/htcimage2.webp'
 
 export default function Courses() {
   return (
