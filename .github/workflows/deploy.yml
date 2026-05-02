@@ -65,11 +65,11 @@ jobs:
             
             # Install dependencies
             echo "Installing dependencies..."
-            npm ci
+            sudo npm ci
             
             # Build Next.js application
             echo "Building Next.js application..."
-            NODE_ENV=production npm run build
+            sudo env NODE_ENV=production npm run build
             
             # Restart application with PM2
             if pm2 describe nextjs-app > /dev/null 2>&1; then
