@@ -55,13 +55,44 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -T 30 -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts || true
 
+      - name: SSH diagnostics
+        run: |
+          echo "EC2_HOST: ${{ secrets.EC2_HOST }}"
+          echo "DNS/IP resolution (getent hosts):"
+          getent hosts "${{ secrets.EC2_HOST }}" || true
+          echo "Attempting SSH handshake (verbose, timeout 20s)..."
+          timeout 20 ssh -vvv \
+            -o BatchMode=yes \
+            -o ConnectTimeout=15 \
+            -o StrictHostKeyChecking=accept-new \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            "${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}" \
+            'echo ok' || true
+
       - name: Deploy to EC2
         run: |
           # Transfer source archive
-          scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=~/.ssh/known_hosts "$RUNNER_TEMP/source.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz
+          for i in 1 2 3; do
+            echo "SCP attempt $i/3..."
+            scp \
+              -o ConnectTimeout=20 \
+              -o ServerAliveInterval=10 \
+              -o ServerAliveCountMax=3 \
+              -o StrictHostKeyChecking=accept-new \
+              -o UserKnownHostsFile=~/.ssh/known_hosts \
+              "$RUNNER_TEMP/source.tar.gz" \
+              ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz && break
+            sleep 5
+          done
 
           # Execute deployment commands on EC2
-          ssh -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=~/.ssh/known_hosts ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
+          ssh \
+            -o ConnectTimeout=20 \
+            -o ServerAliveInterval=10 \
+            -o ServerAliveCountMax=3 \
+            -o StrictHostKeyChecking=accept-new \
+            -o UserKnownHostsFile=~/.ssh/known_hosts \
+            ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
             set -e
 
             echo "Node version: $(node -v || true)"
