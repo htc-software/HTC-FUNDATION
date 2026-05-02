@@ -31,32 +31,23 @@ jobs:
             -C "$GITHUB_WORKSPACE" \
             .
 
-      - name: Setup SSH
-        env:
-          EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+
+      - name: Add EC2 host to known_hosts
         run: |
-          install -m 700 -d ~/.ssh
-          key_file="$HOME/.ssh/id_rsa"
-
-          printf '%s\n' "$EC2_SSH_PRIVATE_KEY" | perl -pe 's/\\n/\n/g; s/\r//g' > "$key_file"
-          if ! grep -q 'BEGIN .*PRIVATE KEY' "$key_file"; then
-            printf '%s' "$EC2_SSH_PRIVATE_KEY" | tr -d '\r\n ' | base64 -d > "$key_file" 2>/dev/null || true
-          fi
-
-          chmod 600 ~/.ssh/id_rsa
-          if ! ssh-keygen -y -f "$key_file" > /dev/null; then
-            echo "::error::EC2_SSH_PRIVATE_KEY must be an unencrypted SSH private key, either pasted with BEGIN/END PRIVATE KEY lines or base64-encoded from the key file."
-            exit 1
-          fi
+          mkdir -p ~/.ssh
           ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         run: |
           # Transfer source archive
-          scp -i ~/.ssh/id_rsa "$RUNNER_TEMP/source.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz
+          scp -o StrictHostKeyChecking=yes "$RUNNER_TEMP/source.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz
 
           # Execute deployment commands on EC2
-          ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
+          ssh -o StrictHostKeyChecking=yes ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
             set -e
 
             echo "Node version: $(node -v || true)"
@@ -106,5 +97,4 @@ jobs:
       - name: Cleanup
         if: always()
         run: |
-          rm -f ~/.ssh/id_rsa
           rm -f "$RUNNER_TEMP/source.tar.gz"
