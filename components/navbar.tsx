@@ -3,7 +3,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
 import { ChevronDown, Menu, X } from "lucide-react"
 
 const LOGO_DARK =
@@ -38,8 +37,6 @@ const navLinks = [
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const pathname = usePathname()
-  const isHome = pathname === "/"
   const [scrolled, setScrolled] = useState(false)
   const onTop = !scrolled
   const useLightLogo = onTop
