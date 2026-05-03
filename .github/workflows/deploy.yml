@@ -101,7 +101,19 @@ jobs:
             PORT=3000 HOSTNAME=0.0.0.0 pm2 start server.js --name "$APP_NAME" --time
             pm2 save
 
-            curl -fsS --retry 6 --retry-delay 2 --max-time 15 http://127.0.0.1:3000/ > /dev/null
+            for attempt in $(seq 1 10); do
+              if curl -fsS --max-time 15 http://127.0.0.1:3000/ > /dev/null; then
+                break
+              fi
+
+              if [ "$attempt" -eq 10 ]; then
+                pm2 logs "$APP_NAME" --lines 80 --nostream
+                exit 1
+              fi
+
+              sleep 2
+            done
+
             pm2 list
           ENDSSH
 
