@@ -3,27 +3,49 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - main  # Change to your desired branch
+      - main
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
 
 jobs:
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
+    env:
+      APP_DIR: /var/www/nextjs-app
+      APP_NAME: nextjs-app
+      NODE_VERSION: 22
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create source archive
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js application
+        run: npm run build
+
+      - name: Create runtime archive
         run: |
-          tar \
-            --exclude='.git' \
-            --exclude='node_modules' \
-            --exclude='.next' \
-            --exclude='.env.local' \
-            -czf "$RUNNER_TEMP/source.tar.gz" \
-            -C "$GITHUB_WORKSPACE" \
-            .
+          set -euo pipefail
+
+          runtime_dir="$RUNNER_TEMP/runtime"
+          mkdir -p "$runtime_dir/.next"
+
+          cp -a .next/standalone/. "$runtime_dir/"
+          cp -a .next/static "$runtime_dir/.next/static"
+          cp -a public "$runtime_dir/public"
+
+          tar -czf "$RUNNER_TEMP/runtime.tar.gz" -C "$runtime_dir" .
 
       - name: Setup SSH
         env:
@@ -46,52 +68,50 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          # Transfer source archive
-          scp -i ~/.ssh/id_rsa "$RUNNER_TEMP/source.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/source.tar.gz
+          set -euo pipefail
 
-          # Execute deployment commands on EC2
-          ssh -i ~/.ssh/id_rsa ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
-            set -e
+          SSH_OPTS="-i ~/.ssh/id_rsa -o BatchMode=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=4"
+
+          scp $SSH_OPTS "$RUNNER_TEMP/runtime.tar.gz" ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:/tmp/${APP_NAME}-runtime.tar.gz
+
+          ssh $SSH_OPTS ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
+            set -euo pipefail
 
             APP_DIR=/var/www/nextjs-app
-            
-            # Ensure the application directory exists, then extract with elevated permissions.
+            APP_NAME=nextjs-app
+            ARCHIVE=/tmp/${APP_NAME}-runtime.tar.gz
+            RELEASE_DIR=/tmp/${APP_NAME}-release
+
+            rm -rf "$RELEASE_DIR"
+            mkdir -p "$RELEASE_DIR"
+            tar -xzf "$ARCHIVE" -C "$RELEASE_DIR"
+            rm -f "$ARCHIVE"
+
             sudo mkdir -p "$APP_DIR"
+            sudo rsync -a --delete --exclude='.env.local' "$RELEASE_DIR"/ "$APP_DIR"/
+            sudo chown -R "$(id -u):$(id -g)" "$APP_DIR"
+            rm -rf "$RELEASE_DIR"
+
             cd "$APP_DIR"
-            
-            # Extract source archive
-            sudo tar --no-same-owner --overwrite -xzf /tmp/source.tar.gz
-            rm /tmp/source.tar.gz
-            
-            # Install dependencies
-            echo "Installing dependencies..."
-            sudo npm ci
-            
-            # Build Next.js application
-            echo "Building Next.js application..."
-            sudo env NODE_ENV=production npm run build
-            
-            # Restart application with PM2
-            if pm2 describe nextjs-app > /dev/null 2>&1; then
-              echo "Restarting existing PM2 process..."
-              pm2 restart nextjs-app
-            else
-              echo "Starting new PM2 process..."
-              pm2 start npm --name "nextjs-app" -- start
-              pm2 save
+
+            if pm2 describe "$APP_NAME" > /dev/null 2>&1; then
+              pm2 delete "$APP_NAME"
             fi
-            
-            # Verify PM2 status
+
+            PORT=3000 HOSTNAME=0.0.0.0 pm2 start server.js --name "$APP_NAME" --time
+            pm2 save
+
+            curl -fsS --retry 6 --retry-delay 2 --max-time 15 http://127.0.0.1:3000/ > /dev/null
             pm2 list
           ENDSSH
 
       - name: Verify deployment
         run: |
           echo "Deployment completed successfully!"
-          echo "Application should be running on port 3000"
+          echo "Application is running on port 3000"
 
       - name: Cleanup
         if: always()
         run: |
           rm -f ~/.ssh/id_rsa
-          rm -f "$RUNNER_TEMP/source.tar.gz"
+          rm -f "$RUNNER_TEMP/runtime.tar.gz"
