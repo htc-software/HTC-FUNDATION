@@ -23,7 +23,7 @@ export function AnnouncementSection() {
 
           <div className="mt-8 md:mt-10">
             <p className="text-white/70 text-[11px] md:text-xs tracking-[0.35em] uppercase">
-              We are Thankful to Announce,
+              We are Thankful t Announce,
             </p>
 
             <h2 className="mt-4 text-white font-extrabold tracking-tight leading-[1.05] text-3xl sm:text-4xl md:text-5xl">
