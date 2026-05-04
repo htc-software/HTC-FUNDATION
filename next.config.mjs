@@ -22,6 +22,11 @@ const nextConfig = {
         hostname: 'foundhudsontrainingcenter.org',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'foundationhtc.ong',
+        pathname: '/**',
+      },
     ],
   },
   async redirects() {
