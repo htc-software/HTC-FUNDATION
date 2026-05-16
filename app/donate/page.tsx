@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { HeartHandshake, Mail, ShieldCheck, Sparkles } from "lucide-react"
+import { Mail, ShieldCheck, Sparkles } from "lucide-react"
+import { DonationForm } from "@/components/donation-form"
 
 export const metadata: Metadata = {
   title: "Donate - HTC Foundation",
@@ -101,29 +102,7 @@ export default function DonatePage() {
                       </p>
                     </div>
 
-                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {[25, 50, 100].map((amount) => (
-                        <div
-                          key={amount}
-                          className="group relative rounded-2xl border border-white/25 bg-white/10 p-5 text-center overflow-hidden transition-all hover:-translate-y-0.5 hover:bg-white/15 hover:border-white/40"
-                        >
-                          <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-white/35 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[420px]" />
-                          <p className="text-white text-2xl font-extrabold">${amount}</p>
-                          <p className="text-white/75 text-xs mt-1 tracking-[0.22em] uppercase">One-time</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                      <Link
-                        href="mailto:coordinator@hudsontrainingcenter.com?subject=Donation%20Inquiry"
-                        className="group relative inline-flex items-center justify-center gap-2 bg-white text-[#0a0a6e] font-semibold px-6 py-3 rounded-full overflow-hidden transition-all hover:-translate-y-0.5 hover:bg-white/90"
-                      >
-                        <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-[#ff0080]/30 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[520px]" />
-                        <Mail className="w-4 h-4" />
-                        Contact Us to Donate
-                      </Link>
-                    </div>
+                    <DonationForm />
                   </div>
                 </div>
               </div>
