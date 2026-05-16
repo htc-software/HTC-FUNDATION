@@ -38,7 +38,7 @@ export function AnnouncementSection() {
 
             <div className="mt-5 inline-flex flex-col items-center gap-1">
               <p className="text-white/90 text-[11px] md:text-xs font-medium tracking-[0.3em] uppercase">
-                Ta Exempt Status Granted
+                Tax Exempt Status Granted
               </p>
               <p className="text-white/75 text-xs md:text-sm">
                 Internal Revenue Service (IRS)
