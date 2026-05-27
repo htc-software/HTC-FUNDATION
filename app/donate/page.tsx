@@ -10,14 +10,23 @@ export const metadata: Metadata = {
 }
 
 export default function DonatePage() {
-  const initiatives = [
-    "To foster supportive community and private sector relationships to service the interest and needs of the Latino Community",
-    "To inform the Latino Community about the strengths and challenges faced by Hudson Training Center Inc for expansion purposes",
-    "To provide mini-grants to students to develop innovative programs and activities in Vocational and Technical Trades",
-    "To provide small grants to Hudson Training Center Inc. for educational staff members to initiate quality projects consistent with the goals of the Foundation and to bring positive attention Hudson Training Center Inc.",
-    "To provide scholarships to students of Hudson Training Center Inc. to further their training for licensing and entrepreneurship opportunities",
-    "To make distributions, for Vocational Training, to organizations that qualify as exempt organizations under Section 501 (C) (3) of the Internal Revenue Code or any successor statute",
-    "To seek donations of equipment and funds from business or individuals to support the Foundation’s Vocational training expansion for the Latino Community at large.",
+  const elements = [
+    {
+      label: "Core Purpose",
+      text: "To empower individuals with accessible, high-quality vocational training, fostering economic opportunity and workforce readiness in high-growth sectors.",
+    },
+    {
+      label: "Key Actions",
+      text: "By providing strategic funding, developing robust partnerships, and delivering essential support services, we connect learners to industry-recognized skills and sustainable careers.",
+    },
+    {
+      label: "Target Audience",
+      text: "Serving our Latino Community, seeking career advancement to build resilient futures.",
+    },
+    {
+      label: "Desired Impact",
+      text: "Creating pathways to high-wage, high-skill employment, strengthening local economies, and ensuring a skilled, adaptable workforce for the future.",
+    },
   ]
 
   return (
@@ -111,25 +120,38 @@ export default function DonatePage() {
             <div className="lg:col-span-7">
               <div className="rounded-[28px] bg-white border border-[#e5e7eb] shadow-sm overflow-hidden animate-in fade-in-0 slide-in-from-bottom-4 duration-700 delay-150">
                 <div className="p-8 md:p-10">
-                  <h3 className="mt-4 text-[#0a0a2e] text-2xl md:text-3xl font-extrabold tracking-tight">
-                    Where Your Support Goes
+                  <h3 className="text-[#0a0a2e] text-2xl md:text-3xl font-extrabold tracking-tight">
+                    Our Mission
                   </h3>
-                  <p className="mt-3 text-[#6b7280] leading-relaxed">
-                    Your generosity helps us expand programs, fund mini-grants and scholarships, and strengthen partnerships
-                    that create lasting impact.
+                  <p className="mt-4 text-[#374151] text-sm md:text-base leading-relaxed">
+                    Foundation for Hudson Training Center Inc.'s mission is to fund vocational programs focusing on connecting
+                    education with real-world jobs, bridging skills gaps, fostering economic mobility, and empowering individuals
+                    with pathways to high-demand careers through funding, mentorship, and wraparound support for technical
+                    training, industry credentials, and lifelong learning. Key elements include equitable access, partnerships
+                    with businesses, and addressing barriers, aiming for successful career entry, advancement, and economic
+                    stability for our Latino Community.
                   </p>
 
-                  <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {initiatives.map((text, idx) => (
-                      <div
-                        key={idx}
-                        className="group rounded-2xl border border-[#e5e7eb] bg-[#f9fafb] p-5 transition-all hover:-translate-y-0.5 hover:border-[#0a0a6e]/40 hover:shadow-sm"
-                      >
-                        <div className="flex items-start gap-3">
-                          <p className="text-[#374151] text-sm leading-relaxed group-hover:text-[#111827]">{text}</p>
+                  <div className="mt-8">
+                    <h4 className="text-[#0a0a2e] text-lg font-bold tracking-tight mb-5">
+                      Elements of Foundation for Hudson Training Center Inc.
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {elements.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="group rounded-2xl border border-[#e5e7eb] bg-[#f9fafb] p-5 transition-all hover:-translate-y-0.5 hover:border-[#0a0a6e]/40 hover:shadow-sm"
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className="mt-1 w-2 h-2 rounded-full bg-[#ff0080] shrink-0" />
+                            <div>
+                              <p className="text-[#0a0a2e] text-sm font-semibold mb-1">{item.label}</p>
+                              <p className="text-[#374151] text-sm leading-relaxed group-hover:text-[#111827]">{item.text}</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
 
                   <div className="mt-10 rounded-2xl border border-[#ff0080]/30 bg-[#ff0080]/5 p-6">
