@@ -3,7 +3,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
 import { ChevronDown, Menu, X } from "lucide-react"
 
 const LOGO_DARK =
@@ -38,8 +37,6 @@ const navLinks = [
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const pathname = usePathname()
-  const isHome = pathname === "/"
   const [scrolled, setScrolled] = useState(false)
   const onTop = !scrolled
   const useLightLogo = onTop
@@ -68,7 +65,7 @@ export function Navbar() {
         }`
       }
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+      <div className="w-full flex items-center justify-between px-6 py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
@@ -128,20 +125,27 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA Button */}
-        <Link
-          href="https://hudsontrainingcenter.com/forms/immigrant"
-          target="_blank"
-          rel="noreferrer"
-          className={
-            onTop
-              ? "hidden lg:inline-block text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors border border-white/60 hover:bg-white/10"
-              : "hidden lg:inline-block text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors border border-white/30 hover:bg-white/10"
-          }
-          style={{ background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)" }}
-        >
-          Vocational Training for our Latino Community!
-        </Link>
+        {/* CTA Buttons */}
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="https://hudsontrainingcenter.com/forms/immigrant"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors hover:opacity-90"
+            style={{ background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)" }}
+          >
+            Vocational Training for our Latino Community!
+          </Link>
+          <Link
+            href="https://www.hudsontrainingcenter.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all hover:opacity-90 tracking-wide"
+            style={{ background: "#0a2a8e" }}
+          >
+            HUDSON TRAINING CENTER
+          </Link>
+        </div>
 
         {/* Mobile menu button */}
         <button
@@ -201,15 +205,21 @@ export function Navbar() {
             href="https://hudsontrainingcenter.com/forms/immigrant"
             target="_blank"
             rel="noreferrer"
-            className={
-              onTop
-                ? "block mt-4 text-white text-sm font-medium px-5 py-2.5 rounded-full text-center border border-white/60"
-                : "block mt-4 bg-[#ff0080] text-white text-sm font-medium px-5 py-2.5 rounded-full text-center"
-            }
-            style={onTop ? { background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)" } : undefined}
+            className="block mt-4 text-white text-sm font-medium px-5 py-2.5 rounded-full text-center"
+            style={{ background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)" }}
             onClick={() => setMobileOpen(false)}
           >
             Vocational Training for our Latino Community!
+          </Link>
+          <Link
+            href="https://www.hudsontrainingcenter.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="block mt-3 text-white text-sm font-bold px-5 py-2.5 rounded-full text-center tracking-wide"
+            style={{ background: "#0a2a8e" }}
+            onClick={() => setMobileOpen(false)}
+          >
+            HUDSON TRAINING CENTER
           </Link>
         </div>
       )}
