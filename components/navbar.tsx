@@ -131,7 +131,7 @@ export function Navbar() {
             href="https://hudsontrainingcenter.com/forms/immigrant"
             target="_blank"
             rel="noreferrer"
-            className="inline-block text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors hover:opacity-90"
+            className="hidden"
             style={{ background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)" }}
           >
             Vocational Training for our Latino Community!
@@ -205,7 +205,7 @@ export function Navbar() {
             href="https://hudsontrainingcenter.com/forms/immigrant"
             target="_blank"
             rel="noreferrer"
-            className="block mt-4 text-white text-sm font-medium px-5 py-2.5 rounded-full text-center"
+            className="hidden"
             style={{ background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)" }}
             onClick={() => setMobileOpen(false)}
           >
