@@ -5,7 +5,35 @@ import { HeartHandshake, Loader2 } from "lucide-react"
 
 const PRESET_AMOUNTS = [25, 50, 100, 250]
 
-export function DonationForm() {
+interface DonationFormProps {
+  /** Identifier sent to /api/checkout so the donation is tracked as a specific cause in Stripe. */
+  cause?: string
+  /** Override the preset donation amounts. */
+  presetAmounts?: number[]
+  /** Label shown under each preset amount (e.g. "One-time" / "Único"). */
+  frequencyLabel?: string
+  /** Placeholder for the custom amount input. */
+  customPlaceholder?: string
+  /** Text of the donate button (the amount is appended automatically). */
+  donateLabel?: string
+  /** Text shown while the checkout session is being created. */
+  processingLabel?: string
+  /** Validation message when the amount is below the minimum. */
+  invalidAmountMessage?: string
+  /** Generic error message when the request fails. */
+  genericErrorMessage?: string
+}
+
+export function DonationForm({
+  cause = "default",
+  presetAmounts = PRESET_AMOUNTS,
+  frequencyLabel = "One-time",
+  customPlaceholder = "Custom amount",
+  donateLabel = "Donate",
+  processingLabel = "Processing...",
+  invalidAmountMessage = "Please enter a valid amount (minimum $1).",
+  genericErrorMessage = "Failed to process donation. Please try again.",
+}: DonationFormProps = {}) {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null)
   const [customAmount, setCustomAmount] = useState("")
   const [isCustom, setIsCustom] = useState(false)
@@ -36,7 +64,7 @@ export function DonationForm() {
     const amount = getAmount()
 
     if (amount < 1) {
-      setError("Please enter a valid amount (minimum $1).")
+      setError(invalidAmountMessage)
       return
     }
 
@@ -47,7 +75,7 @@ export function DonationForm() {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount }),
+        body: JSON.stringify({ amount, cause }),
       })
 
       const data = await response.json()
@@ -60,7 +88,7 @@ export function DonationForm() {
         window.location.href = data.url
       }
     } catch (err: any) {
-      setError(err.message || "Failed to process donation. Please try again.")
+      setError(err.message || genericErrorMessage)
     } finally {
       setLoading(false)
     }
@@ -69,7 +97,7 @@ export function DonationForm() {
   return (
     <div className="relative">
       <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {PRESET_AMOUNTS.map((amount) => (
+        {presetAmounts.map((amount) => (
           <button
             key={amount}
             onClick={() => handlePresetClick(amount)}
@@ -81,7 +109,7 @@ export function DonationForm() {
           >
             <span className="pointer-events-none absolute -left-24 top-0 h-full w-24 bg-gradient-to-r from-transparent via-white/35 to-transparent -skew-x-12 opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[420px]" />
             <p className="text-white text-2xl font-extrabold">${amount}</p>
-            <p className="text-white/75 text-xs mt-1 tracking-[0.22em] uppercase">One-time</p>
+            <p className="text-white/75 text-xs mt-1 tracking-[0.22em] uppercase">{frequencyLabel}</p>
           </button>
         ))}
       </div>
@@ -101,7 +129,7 @@ export function DonationForm() {
               type="number"
               min="1"
               step="any"
-              placeholder="Custom amount"
+              placeholder={customPlaceholder}
               value={customAmount}
               onFocus={handleCustomFocus}
               onChange={(e) => {
@@ -136,7 +164,7 @@ export function DonationForm() {
           ) : (
             <HeartHandshake className="w-5 h-5" />
           )}
-          {loading ? "Processing..." : `Donate${getAmount() > 0 ? ` $${getAmount()}` : ""}`}
+          {loading ? processingLabel : `${donateLabel}${getAmount() > 0 ? ` $${getAmount()}` : ""}`}
         </button>
       </div>
     </div>

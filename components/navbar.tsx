@@ -31,6 +31,7 @@ const navLinks = [
     ],
   },
   { label: "Contact Us", href: "/contact-us" },
+  { label: "Ayuda Venezuela", href: "/venezuela" },
   { label: "Donate", href: "/donate" },
 ]
 
