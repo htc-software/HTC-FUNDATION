@@ -25,7 +25,7 @@ const slides = [
       </p>
     ),
     cta: "Vocational Training for our Latino Community!",
-    ctaLink: "/contact-us",
+    ctaLink: "https://hudsontrainingcenter.com/forms/immigrant?ref=I4398HTC",
   },
 ]
 
