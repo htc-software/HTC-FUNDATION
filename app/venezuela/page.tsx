@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 }
 
 const stats = [
-  { value: "920+", label: "Personas fallecidas", icon: AlertTriangle },
-  { value: "4.300+", label: "Personas heridas", icon: Users },
+  { value: "1.719+", label: "Personas fallecidas", icon: AlertTriangle },
+  { value: "5.000+", label: "Personas heridas", icon: Users },
   { value: "~50.000", label: "Personas desaparecidas", icon: HandHeart },
   { value: "7,5", label: "Magnitud del sismo principal", icon: AlertTriangle },
 ]
@@ -126,7 +126,7 @@ export default function VenezuelaPage() {
             })}
           </div>
           <p className="mt-5 text-center text-white/45 text-xs">
-            Cifras preliminares al 26 de junio de 2026. Fuentes: USGS y Wikipedia.
+            Cifras preliminares al 29 de junio de 2026. Fuentes: USGS y Wikipedia.
           </p>
         </div>
       </section>
@@ -167,8 +167,8 @@ export default function VenezuelaPage() {
                   </p>
 
                   <p className="mt-4 text-[#374151] text-sm md:text-base leading-relaxed">
-                    Las cifras preliminares hablan de más de <strong>920 fallecidos</strong>, más de{" "}
-                    <strong>4.300 heridos</strong> y cerca de <strong>50.000 personas desaparecidas</strong>.
+                    Las cifras preliminares hablan de más de <strong>1.719 fallecidos</strong>, más de{" "}
+                    <strong>5.000 heridos</strong> y cerca de <strong>50.000 personas desaparecidas</strong>.
                     Se declaró el estado de emergencia nacional y equipos de rescate locales e
                     internacionales trabajan contra el reloj para auxiliar a las familias afectadas.
                   </p>
