@@ -34,6 +34,7 @@ const navLinks = [
   { label: "Ayuda Venezuela", href: "/venezuela" },
   // HTC_FOUNDATION_VIRTUAL_COURSES_HTC_URL_REAL_2B_20260702
   { label: "Virtual Courses", href: "https://hudsontrainingcenter.com/forms/virtual-courses?ref=I4398HTC" },
+  { label: "Vocational Training", href: "https://hudsontrainingcenter.com/forms/immigrant?ref=I4398HTC" },
   { label: "Donate", href: "/donate" },
 ]
 

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, GraduationCap, HeartHandshake, ArrowRight } from "lucide-react"
 
 const slides = [
   {
@@ -14,8 +14,6 @@ const slides = [
         <span className="font-bold">Latino Community,</span> to rise to the next level in personal and professional growth.
       </p>
     ),
-    cta: "Vocational Training for our Latino Community!",
-    ctaLink: "https://hudsontrainingcenter.com/forms/immigrant?ref=I4398HTC",
   },
   {
     image: "/htcimage2.webp",
@@ -24,8 +22,30 @@ const slides = [
         Come Study: <span className="font-bold">Electricity, Plumbing, Heating, HVAC and more</span>, at no cost!
       </p>
     ),
-    cta: "Vocational Training for our Latino Community!",
-    ctaLink: "https://hudsontrainingcenter.com/forms/immigrant?ref=I4398HTC",
+  },
+]
+
+const ctaButtons = [
+  {
+    label: "Virtual Courses",
+    sublabel: "Learn online, at your pace",
+    href: "https://hudsontrainingcenter.com/forms/virtual-courses?ref=I4398HTC",
+    Icon: GraduationCap,
+    className:
+      "border-white/20 hover:border-white/40 shadow-lg shadow-[#0a0a6e]/30 hover:shadow-[#2f7bff]/40",
+    style: { background: "linear-gradient(135deg, #0a0a6e 0%, #2f7bff 100%)" },
+    iconWrap: "bg-white/15",
+  },
+  {
+    label: "Ayuda Venezuela",
+    sublabel: "Apoya a nuestra gente",
+    href: "/venezuela",
+    Icon: HeartHandshake,
+    className:
+      "border-white/25 hover:border-white shadow-lg shadow-[#cf142b]/25 hover:shadow-[#ffcc00]/40",
+    // Venezuela flag: amarillo, azul, rojo
+    style: { background: "linear-gradient(135deg, #ffcc00 0%, #00247d 55%, #cf142b 100%)" },
+    iconWrap: "bg-black/20",
   },
 ]
 
@@ -70,17 +90,30 @@ export function HeroSlider() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center">
         {slide.content}
         <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href={slide.ctaLink}
-            target={slide.ctaLink.startsWith("http") ? "_blank" : undefined}
-            rel={slide.ctaLink.startsWith("http") ? "noreferrer" : undefined}
-            className="inline-block px-8 py-3.5 rounded-full text-white font-medium text-base md:text-lg border-2 border-white/40 hover:bg-white/10 transition-colors"
-            style={{
-              background: "linear-gradient(135deg, #0a0a6e, #8b1a6e)",
-            }}
-          >
-            {slide.cta}
-          </Link>
+          {ctaButtons.map((btn) => {
+            const { Icon } = btn
+            return (
+              <Link
+                key={btn.label}
+                href={btn.href}
+                target={btn.href.startsWith("http") ? "_blank" : undefined}
+                rel={btn.href.startsWith("http") ? "noreferrer" : undefined}
+                className={`group/cta flex items-center gap-3 pl-3 pr-5 py-2.5 rounded-full text-white text-left border-2 transition-all duration-300 hover:-translate-y-0.5 ${btn.className}`}
+                style={btn.style}
+              >
+                <span
+                  className={`flex items-center justify-center w-11 h-11 rounded-full ${btn.iconWrap} shrink-0 transition-transform group-hover/cta:scale-110`}
+                >
+                  <Icon className="w-5 h-5" />
+                </span>
+                <span className="flex flex-col leading-tight">
+                  <span className="font-bold text-base md:text-lg">{btn.label}</span>
+                  <span className="text-xs md:text-sm text-white/80">{btn.sublabel}</span>
+                </span>
+                <ArrowRight className="w-4 h-4 ml-1 opacity-70 transition-transform group-hover/cta:translate-x-1" />
+              </Link>
+            )
+          })}
         </div>
       </div>
 
